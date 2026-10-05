@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0d12" />
+  <title>SwitchWeek — telco plan that adapts weekly</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell" aria-live="polite">
+    <header class="topbar">
+      <div class="brandmark" aria-label="NOVA mobile">NOVA</div>
+      <button class="ghost-button" id="resetButton" type="button">Reset demo</button>
+    </header>
+
+    <section class="hero" id="hero">
+      <div class="eyebrow">SWITCHWEEK</div>
+      <h1>Your week changes.<br>Your plan can too.</h1>
+      <p class="lead">Choose one useful boost for this week. Included in your plan — no points, no coupons to hunt.</p>
+      <div class="switch-badge"><span id="switchCount">1</span> weekly switch available</div>
+    </section>
+
+    <section class="active-card hidden" id="activeCard" aria-labelledby="activeTitle">
+      <div class="active-topline">
+        <span class="status-dot"></span>
+        <span>ACTIVE THIS WEEK</span>
+      </div>
+      <div class="active-icon" id="activeIcon">↗</div>
+      <h2 id="activeTitle">Study Mode</h2>
+      <p id="activeBenefit">+10 GB hotspot for laptop work</p>
+      <div class="countdown-row">
+        <div>
+          <span class="countdown-label">Ends in</span>
+          <strong>6d 23h</strong>
+        </div>
+        <div class="value-chip" id="activeValue">~12 zł value</div>
+      </div>
+      <div class="progress"><span style="width:18%"></span></div>
+      <p class="micro">Next Switch unlocks Monday. Your base plan stays unchanged.</p>
+    </section>
+
+    <section class="chooser" id="chooser">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">WHAT DO YOU NEED NOW?</span>
+          <h2>Pick your week</h2>
+        </div>
+        <span class="week-label">Oct 5–11</span>
+      </div>
+
+      <div class="mode-grid">
+        <button class="mode-card" data-mode="study" type="button">
+          <span class="mode-icon">⌁</span>
+          <span class="mode-title">Study</span>
+          <span class="mode-benefit">+10 GB hotspot</span>
+          <span class="mode-meta">Laptop-ready all week</span>
+        </button>
+        <button class="mode-card" data-mode="go" type="button">
+          <span class="mode-icon">↗</span>
+          <span class="mode-title">Go</span>
+          <span class="mode-benefit">+5 GB roaming</span>
+          <span class="mode-meta">For a spontaneous trip</span>
+        </button>
+        <button class="mode-card" data-mode="share" type="button">
+          <span class="mode-icon">∞</span>
+          <span class="mode-title">Share</span>
+          <span class="mode-benefit">Send 10 GB</span>
+          <span class="mode-meta">Help a friend this week</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="insight-strip">
+      <div class="insight-number">52</div>
+      <div><strong>useful reasons a year</strong><br><span>to open the operator app — instead of waiting for a bill.</span></div>
+    </section>
+
+    <footer class="nav" aria-label="Demo navigation">
+      <span>⌂<small>Home</small></span>
+      <span class="nav-active">◈<small>Switch</small></span>
+      <span>◎<small>Usage</small></span>
+      <span>○<small>Profile</small></span>
+    </footer>
+  </main>
+
+  <div class="sheet-backdrop hidden" id="sheetBackdrop"></div>
+  <section class="sheet hidden" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-handle"></div>
+    <div class="sheet-kicker">YOUR WEEKLY SWITCH</div>
+    <h2 id="sheetTitle">Study</h2>
+    <p class="sheet-big" id="sheetBenefit">+10 GB hotspot</p>
+    <p class="sheet-copy" id="sheetCopy">Turn your phone into a reliable laptop connection for classes, projects and library days.</p>
+    <div class="details-row"><span>Duration</span><strong>7 days</strong></div>
+    <div class="details-row"><span>Price today</span><strong>Included</strong></div>
+    <button class="primary" id="activateButton" type="button">Activate for this week</button>
+    <button class="secondary" id="cancelButton" type="button">Choose another</button>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

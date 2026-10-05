@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0d12" />
+  <title>SwitchWeek — telco plan that adapts weekly</title>
+  <style>
+:root{
+  color-scheme:dark;
+  --bg:#0a0c11;
+  --surface:#12151d;
+  --surface2:#171b24;
+  --text:#f7f8fb;
+  --muted:#9aa3b2;
+  --line:rgba(255,255,255,.09);
+  --accent:#8cffcf;
+  --accent2:#7d78ff;
+  --danger:#ffbb69;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#05070b;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text)}
+body{display:flex;justify-content:center;padding:20px 0 40px;background:
+radial-gradient(circle at 50% 0%,rgba(125,120,255,.16),transparent 32rem),#05070b}
+button{font:inherit}
+.shell{width:min(100%,430px);min-height:860px;background:var(--bg);border:1px solid rgba(255,255,255,.08);border-radius:34px;overflow:hidden;position:relative;box-shadow:0 24px 90px rgba(0,0,0,.48);padding-bottom:92px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:24px 22px 12px}
+.brandmark{font-size:18px;font-weight:900;letter-spacing:.16em}.brandmark::after{content:"+";color:var(--accent);margin-left:2px}
+.ghost-button{border:0;background:transparent;color:#7f8998;font-size:12px;cursor:pointer;padding:8px}
+.hero{padding:22px 22px 18px;background:linear-gradient(180deg,rgba(125,120,255,.13),transparent 84%)}
+.eyebrow,.sheet-kicker{font-size:11px;font-weight:850;letter-spacing:.14em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:34px;line-height:1.02;letter-spacing:-.045em;margin:12px 0 12px;max-width:360px}
+.lead{color:#b7bfcb;line-height:1.5;font-size:15px;max-width:360px;margin:0 0 18px}
+.switch-badge{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(140,255,207,.25);background:rgba(140,255,207,.08);color:#d7ffef;border-radius:999px;padding:9px 12px;font-size:13px;font-weight:700}
+.switch-badge span{display:grid;place-items:center;background:var(--accent);color:#05100b;width:22px;height:22px;border-radius:50%;font-weight:900}
+.chooser{padding:14px 18px 8px}.section-heading{display:flex;justify-content:space-between;align-items:end;padding:0 4px 14px}.section-heading h2{font-size:24px;letter-spacing:-.03em;margin:5px 0 0}.week-label{font-size:12px;color:var(--muted);padding-bottom:4px}
+.mode-grid{display:grid;gap:10px}.mode-card{position:relative;text-align:left;border:1px solid var(--line);background:linear-gradient(145deg,#151922,#10131a);border-radius:21px;padding:16px 16px 15px;color:var(--text);cursor:pointer;display:grid;grid-template-columns:46px 1fr;grid-template-rows:auto auto auto;column-gap:13px;transition:.18s ease;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.mode-card:hover,.mode-card:focus-visible{transform:translateY(-2px);border-color:rgba(140,255,207,.35);outline:none}.mode-card::after{content:"→";position:absolute;right:16px;top:18px;color:#7a8495}
+.mode-icon{grid-row:1/4;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(125,120,255,.22),rgba(140,255,207,.12));font-size:22px;color:var(--accent)}
+.mode-title{font-weight:850;font-size:17px}.mode-benefit{font-weight:700;font-size:14px;color:#e6e9ef;margin-top:2px}.mode-meta{font-size:12px;color:var(--muted);margin-top:3px}
+.insight-strip{margin:14px 22px 0;padding:15px 0;border-top:1px solid var(--line);display:flex;align-items:center;gap:13px;color:#d8dde5}.insight-number{font-size:34px;font-weight:900;letter-spacing:-.05em;color:var(--accent)}.insight-strip strong{font-size:13px}.insight-strip span{font-size:11px;color:var(--muted);line-height:1.4}
+.nav{position:absolute;left:0;right:0;bottom:0;height:78px;border-top:1px solid var(--line);background:rgba(10,12,17,.96);display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:5px 8px 10px;backdrop-filter:blur(16px)}.nav span{color:#697384;display:grid;place-items:center;gap:4px;font-size:19px}.nav small{font-size:10px}.nav .nav-active{color:var(--accent)}
+.sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.67);backdrop-filter:blur(6px);z-index:20}.sheet{position:fixed;z-index:21;left:50%;bottom:18px;transform:translateX(-50%);width:min(calc(100% - 24px),410px);background:#151922;border:1px solid rgba(255,255,255,.11);border-radius:28px;padding:10px 20px 18px;box-shadow:0 24px 90px rgba(0,0,0,.56)}.sheet-handle{width:48px;height:5px;border-radius:10px;background:#444b58;margin:2px auto 20px}.sheet h2{font-size:30px;margin:8px 0 4px;letter-spacing:-.04em}.sheet-big{font-size:18px;font-weight:800;color:var(--accent);margin:0 0 10px}.sheet-copy{color:#aeb7c4;line-height:1.48;font-size:14px;margin:0 0 18px}.details-row{display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.details-row strong{color:var(--text)}.primary,.secondary{width:100%;border-radius:15px;padding:14px 16px;font-weight:850;cursor:pointer}.primary{border:0;background:var(--accent);color:#07100d;margin-top:15px}.secondary{border:0;background:transparent;color:#aab3c0;margin-top:5px}
+.active-card{margin:12px 18px 10px;padding:20px;border-radius:24px;background:linear-gradient(145deg,rgba(140,255,207,.15),rgba(125,120,255,.12));border:1px solid rgba(140,255,207,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}.active-topline{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.12em;color:var(--accent);font-weight:900}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(140,255,207,.11)}.active-icon{font-size:30px;margin:15px 0 3px}.active-card h2{font-size:28px;margin:2px 0 3px;letter-spacing:-.04em}.active-card>p{color:#bdc5d0;margin:0 0 16px}.countdown-row{display:flex;align-items:end;justify-content:space-between;border-top:1px solid rgba(255,255,255,.11);padding-top:14px}.countdown-label{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}.countdown-row strong{font-size:18px}.value-chip{font-size:11px;padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.08);color:#dfe5ec}.progress{height:5px;background:rgba(255,255,255,.08);border-radius:9px;overflow:hidden;margin:15px 0 8px}.progress span{display:block;height:100%;background:var(--accent);border-radius:9px}.micro{font-size:11px!important;color:#83909f!important;margin:0!important}
+.hidden{display:none!important}
+@media (max-width:470px){body{padding:0;background:var(--bg)}.shell{width:100%;min-height:100vh;border:0;border-radius:0}.sheet{bottom:0;width:100%;border-radius:26px 26px 0 0}.hero h1{font-size:32px}}
+
+</style>
+</head>
+<body>
+  <main class="shell" aria-live="polite">
+    <header class="topbar">
+      <div class="brandmark" aria-label="NOVA mobile">NOVA</div>
+      <button class="ghost-button" id="resetButton" type="button">Reset demo</button>
+    </header>
+
+    <section class="hero" id="hero">
+      <div class="eyebrow">SWITCHWEEK</div>
+      <h1>Your week changes.<br>Your plan can too.</h1>
+      <p class="lead">Choose one useful boost for this week. Included in your plan — no points, no coupons to hunt.</p>
+      <div class="switch-badge"><span id="switchCount">1</span> weekly switch available</div>
+    </section>
+
+    <section class="active-card hidden" id="activeCard" aria-labelledby="activeTitle">
+      <div class="active-topline">
+        <span class="status-dot"></span>
+        <span>ACTIVE THIS WEEK</span>
+      </div>
+      <div class="active-icon" id="activeIcon">↗</div>
+      <h2 id="activeTitle">Study Mode</h2>
+      <p id="activeBenefit">+10 GB hotspot for laptop work</p>
+      <div class="countdown-row">
+        <div>
+          <span class="countdown-label">Ends in</span>
+          <strong>6d 23h</strong>
+        </div>
+        <div class="value-chip" id="activeValue">~12 zł value</div>
+      </div>
+      <div class="progress"><span style="width:18%"></span></div>
+      <p class="micro">Next Switch unlocks Monday. Your base plan stays unchanged.</p>
+    </section>
+
+    <section class="chooser" id="chooser">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">WHAT DO YOU NEED NOW?</span>
+          <h2>Pick your week</h2>
+        </div>
+        <span class="week-label">Oct 5–11</span>
+      </div>
+
+      <div class="mode-grid">
+        <button class="mode-card" data-mode="study" type="button">
+          <span class="mode-icon">⌁</span>
+          <span class="mode-title">Study</span>
+          <span class="mode-benefit">+10 GB hotspot</span>
+          <span class="mode-meta">Laptop-ready all week</span>
+        </button>
+        <button class="mode-card" data-mode="go" type="button">
+          <span class="mode-icon">↗</span>
+          <span class="mode-title">Go</span>
+          <span class="mode-benefit">+5 GB roaming</span>
+          <span class="mode-meta">For a spontaneous trip</span>
+        </button>
+        <button class="mode-card" data-mode="share" type="button">
+          <span class="mode-icon">∞</span>
+          <span class="mode-title">Share</span>
+          <span class="mode-benefit">Send 10 GB</span>
+          <span class="mode-meta">Help a friend this week</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="insight-strip">
+      <div class="insight-number">52</div>
+      <div><strong>useful reasons a year</strong><br><span>to open the operator app — instead of waiting for a bill.</span></div>
+    </section>
+
+    <footer class="nav" aria-label="Demo navigation">
+      <span>⌂<small>Home</small></span>
+      <span class="nav-active">◈<small>Switch</small></span>
+      <span>◎<small>Usage</small></span>
+      <span>○<small>Profile</small></span>
+    </footer>
+  </main>
+
+  <div class="sheet-backdrop hidden" id="sheetBackdrop"></div>
+  <section class="sheet hidden" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-handle"></div>
+    <div class="sheet-kicker">YOUR WEEKLY SWITCH</div>
+    <h2 id="sheetTitle">Study</h2>
+    <p class="sheet-big" id="sheetBenefit">+10 GB hotspot</p>
+    <p class="sheet-copy" id="sheetCopy">Turn your phone into a reliable laptop connection for classes, projects and library days.</p>
+    <div class="details-row"><span>Duration</span><strong>7 days</strong></div>
+    <div class="details-row"><span>Price today</span><strong>Included</strong></div>
+    <button class="primary" id="activateButton" type="button">Activate for this week</button>
+    <button class="secondary" id="cancelButton" type="button">Choose another</button>
+  </section>
+
+  <script>
+const modes = {
+  study: {
+    title: 'Study', activeTitle: 'Study Mode', icon: '⌁', benefit: '+10 GB hotspot', activeBenefit: '+10 GB hotspot for laptop work', value: '~12 zł value', copy: 'Turn your phone into a reliable laptop connection for classes, projects and library days.'
+  },
+  go: {
+    title: 'Go', activeTitle: 'Go Mode', icon: '↗', benefit: '+5 GB roaming', activeBenefit: '+5 GB roaming for this week', value: '~25 zł value', copy: 'A spontaneous city break should not require hunting through roaming menus or buying a new bundle.'
+  },
+  share: {
+    title: 'Share', activeTitle: 'Share Mode', icon: '∞', benefit: 'Send 10 GB', activeBenefit: '10 GB ready to send to a friend', value: '~10 zł value', copy: 'Use this week’s plan value socially: send a useful data boost to someone who needs it now.'
+  }
+};
+
+const sheet = document.getElementById('sheet');
+const backdrop = document.getElementById('sheetBackdrop');
+const chooser = document.getElementById('chooser');
+const hero = document.getElementById('hero');
+const activeCard = document.getElementById('activeCard');
+const activateButton = document.getElementById('activateButton');
+let selected = null;
+
+function openSheet(key){
+  selected = key;
+  const m = modes[key];
+  document.getElementById('sheetTitle').textContent = m.title;
+  document.getElementById('sheetBenefit').textContent = m.benefit;
+  document.getElementById('sheetCopy').textContent = m.copy;
+  sheet.classList.remove('hidden'); backdrop.classList.remove('hidden');
+}
+function closeSheet(){sheet.classList.add('hidden');backdrop.classList.add('hidden');}
+function activate(){
+  const m = modes[selected];
+  closeSheet();
+  chooser.classList.add('hidden');
+  hero.classList.add('hidden');
+  activeCard.classList.remove('hidden');
+  document.getElementById('activeIcon').textContent = m.icon;
+  document.getElementById('activeTitle').textContent = m.activeTitle;
+  document.getElementById('activeBenefit').textContent = m.activeBenefit;
+  document.getElementById('activeValue').textContent = m.value;
+  localStorage.setItem('switchweek-active', selected);
+}
+function reset(){
+  localStorage.removeItem('switchweek-active'); selected = null;
+  activeCard.classList.add('hidden'); chooser.classList.remove('hidden'); hero.classList.remove('hidden'); closeSheet();
+}
+
+document.querySelectorAll('.mode-card').forEach(el => el.addEventListener('click', () => openSheet(el.dataset.mode)));
+document.getElementById('cancelButton').addEventListener('click', closeSheet);
+backdrop.addEventListener('click', closeSheet);
+activateButton.addEventListener('click', activate);
+document.getElementById('resetButton').addEventListener('click', reset);
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSheet(); });
+
+const saved = localStorage.getItem('switchweek-active');
+if(saved && modes[saved]){ selected = saved; activate(); }
+
+</script>
+</body>
+</html>
